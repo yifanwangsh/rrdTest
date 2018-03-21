@@ -26,7 +26,7 @@ public class WriteRrdData {
 			
 			for (int i = 0; i < dst.getDb().getDsCount(); i++) {
 				if (!src.getDb().getDatasource(i).getName().equals(dst.getDb().getDatasource(i).getName())) {
-					throw new IllegalArgumentException("Expecting datasource to be the same");
+					throw new IllegalArgumentException("Expecting datasource to be the same, src is " + src.getDb().getDatasource(i).getName() + ", dst is " + dst.getDb().getDatasource(i).getName());
 				}
 				Datasource ds = src.getDb().getDatasource(i);
 				String dsName = ds.getName();
@@ -42,7 +42,7 @@ public class WriteRrdData {
 			}
 			
 			sample.update();
-			System.out.println("Now the rrd starts at " + dst.getHighFrequencyStartTime());
+			System.out.println("Now the high frequency rrd starts at " + dst.getHighFrequencyStartTime());
 			System.out.println("Perform next update!");
 			System.out.println("");
 			System.out.println("");

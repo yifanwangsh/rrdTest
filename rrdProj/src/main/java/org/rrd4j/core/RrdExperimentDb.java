@@ -80,9 +80,14 @@ public class RrdExperimentDb {
 	}
 	
 	public boolean allFilled() throws IOException {
-		Archive archive = findHighFrequencyArchive();
+		
+		long mostSteps = 0L;
+		for (long steps : getArcSteps()) {
+			if (steps > mostSteps) mostSteps = steps;
+		}
+		Archive archive = getArchiveBySteps(mostSteps);
 		for (int i = 0; i < db.getDsCount(); i++) {
-			if (Double.isNaN(archive.getRobin(i).getValue(0)))
+			if (Double.isNaN(archive.getRobin(i).getValue(0)) && !db.getDatasources()[i].getName().equals("_PROTOTYPE"))
 				return false;
 		}
 		return true;

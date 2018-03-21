@@ -1,4 +1,4 @@
-package martelloProj.rrdProj;
+package org.rrd4j.core;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

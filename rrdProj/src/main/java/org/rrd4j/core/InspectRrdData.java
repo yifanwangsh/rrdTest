@@ -66,6 +66,7 @@ public class InspectRrdData {
 				System.out.println("This archive is not empty");
 			}
 			System.out.println("It stores " + archive.getRows() + " rows of data!");
+			firstValueFilled(archive);
 			System.out.println("-------");
 		}
 	}
@@ -80,5 +81,16 @@ public class InspectRrdData {
 			}
 		}
 		return collection.isEmpty();
+	}
+	
+	public void firstValueFilled(Archive archive) throws IOException {
+		for (int i = 0; i < db.getDsCount(); i++) {
+			if (Double.isNaN(archive.getRobin(i).getValue(0)) && !db.getDatasources()[i].getName().equals("_PROTOTYPE")) {
+				System.out.println("The first value of this archive is not filled");
+				System.out.println("The datasource is " + db.getDatasource(i).getName());
+				return;
+			}
+		}
+		System.out.println("The first value of this archive is filled");
 	}
 }

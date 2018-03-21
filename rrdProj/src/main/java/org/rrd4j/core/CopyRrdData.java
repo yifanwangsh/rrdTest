@@ -1,14 +1,8 @@
 package org.rrd4j.core;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.martellotech.marwatch.rrd.RRDFileStore;
-import com.martellotech.marwatch.rrd.RRDFileStore.InvalidKeyName;
-import com.martellotech.marwatch.rrd.RRDFileStore.NotFound;
-import com.martellotech.marwatch.rrd.RRDUpdater;
 
 public class CopyRrdData {
 	public CopyRrdData(String basedir, String guid, String name, Long now) throws IOException {
@@ -30,7 +24,7 @@ public class CopyRrdData {
 		return rrdPath;
 	}
 	
-	public void writeData() throws IOException, InvalidKeyName, NotFound, InterruptedException {
+	public void writeData() throws IOException, InterruptedException {
 		System.out.println("The rrd last updates on " + db.getLastArchiveUpdateTime());
 		final Sample sample = db.createSample(startTime + 300);
 		
